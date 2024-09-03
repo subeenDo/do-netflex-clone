@@ -5,7 +5,7 @@ import "./Banner.css"
 
 const Banner = () => {
     const {data, isLoading, isError, error}= usePopulerMoviesQery()
-    console.log("ddd", data);
+    
     if (isLoading) {
         return (
             <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
