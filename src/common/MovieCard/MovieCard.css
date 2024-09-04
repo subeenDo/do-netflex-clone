@@ -30,3 +30,16 @@
 .badge {
     margin-right: 5px;
   }
+
+  @media (max-width: 768px) {
+    .movie-card {
+        margin-left: 18%;
+        margin-bottom: 5%;
+        width: 320px;
+        height: 480px;
+        background-size: cover;
+        cursor:pointer;
+        transition:0.5s;
+        ;
+    }
+}

@@ -1,0 +1,42 @@
+.custom-alert {
+    background-color: transparent !important;
+    font-size: 2rem  !important;
+    border: none  !important;
+    color: white  !important;
+    text-align: center !important;
+    margin-top: 10% !important;
+  }
+  
+  /* Center the pagination container */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%; /* Optional: Add margin for spacing */
+    margin-bottom: 5%; /* Optional: Add margin for spacing */
+  }
+  
+  /* Style for the pagination component */
+  .pagination {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .pagination-container .pagination .page-link {
+    background-color: transparent !important;
+    border: 1px solid red !important;
+    color: white !important;
+  }
+  
+  .pagination-container .pagination .page-link:hover {
+    background-color: rgba(255, 0, 0, 0.596) !important;
+    color: white !important;
+  }
+  
+  .pagination-container .pagination .active .page-link {
+    background-color: red !important;
+    color: white !important;
+  }
+
+  

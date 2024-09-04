@@ -29,7 +29,9 @@ const MovieCard = ({movie}) => {
     className='movie-card'
     >
         <div className='overlay'>
-            <h2>{movie.title}</h2>
+            <h2 className='movie-card-title'>
+            {movie.title.length > 55 ? movie.title.substring(0, 60) + '...' : movie.title}
+            </h2>
             {showGenre(movie.genre_ids).map((id)=>(
                 <Badge bg="danger">{id}</Badge>
             )) }
