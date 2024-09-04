@@ -3,6 +3,7 @@ import { useUpcommingMoviesQery } from '../../../../hooks/useUpcommingMovies';
 import Alert from 'react-bootstrap/Alert';
 import MovieSlider from '../../../../common/MovieSlider/MovieSlider';
 import { responsive } from '../../../../constants/responsive';
+import SyncLoader from 'react-spinners/SyncLoader';
 
 
 const Upcomming = () => {
@@ -11,13 +12,11 @@ const Upcomming = () => {
 
     if (isLoading) {
         return (
-            <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-                <div className="spinner-border text-primary" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
-            </div>
+          <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+            <SyncLoader color="#f92828" margin={5} size={15} />
+          </div>
         );
-    }
+      }
 
     if (isError) {
         return (
