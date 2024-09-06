@@ -3,9 +3,11 @@ import { usePopulerMoviesQery } from '../../../../hooks/usePopulerMovies'
 import Alert from 'react-bootstrap/Alert';
 import "./Banner.css"
 import SyncLoader from 'react-spinners/SyncLoader';
+import { useNavigate } from 'react-router-dom';
 
 const Banner = () => {
     const {data, isLoading, isError, error}= usePopulerMoviesQery()
+    const navigate = useNavigate();
     
     if (isLoading) {
         return (
@@ -20,12 +22,17 @@ const Banner = () => {
             <Alert variant='danger'>{error.message}</Alert>
         );
     }
+    const movie = data.results[0];
+    const handleClick = () => {
+      navigate(`/movies/${movie.id}`);
+    };
 
   return (
     <div style={{
         backgroundImage:"url("+`https://media.themoviedb.org/t/p/w533_and_h300_bestv2${data.results[0].poster_path}`+")",
         }}
         className='banner'
+        onClick={handleClick} 
     >
         <div className='text-white banner-text-area'>
             <h1>{data?.results[0].title}</h1>

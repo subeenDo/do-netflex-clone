@@ -1,3 +1,7 @@
+.container{
+  margin-top: 5%;
+}
+
 .custom-alert {
     background-color: transparent !important;
     font-size: 2rem  !important;
@@ -39,4 +43,47 @@
     color: white !important;
   }
 
+  .sorting-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5%;
+  }
   
+  .sorting-filter label {
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .sorting-filter .form-select {
+    background-color:#000; 
+    color: #ccc; 
+    border: 1px solid #ccc; 
+    max-width: 200px; 
+  }
+  
+  .sorting-filter .form-select option {
+    background-color: #000; 
+    color: #fff;
+  }
+
+  .sorting-filter .form-select:focus option:checked {
+    background-color: rgb(255, 35, 35); 
+    color: #fff;
+  }
+
+  .genre-filter {
+    display: flex; 
+    align-items: center; 
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 5%;
+  }
+  
+  .genre-filter .btn {
+    margin-bottom: 3px;
+  }
+
+  
+  
+
