@@ -7,8 +7,8 @@ import ReactPaginate from 'react-paginate';
 import SyncLoader from 'react-spinners/SyncLoader';
 import { useSearchMovieQuery } from '../../hooks/useSearchMovie';
 import { useMovieGenreQuery } from '../../hooks/useMovieGenre';
+import CustomDropdown from '../../common/CustomDropdown/CustomDropdown';
 import "./Moviepage.css";
-import Form from 'react-bootstrap/Form';
 
 const Moviepage = () => {
     const [query, setQuery] = useSearchParams();
@@ -19,41 +19,39 @@ const Moviepage = () => {
     const navigate = useNavigate();
     const [sortOption, setSortOption] = useState('popularity.desc');
 
-
-    const { data:genreData} = useMovieGenreQuery(); 
+    const { data: genreData } = useMovieGenreQuery(); 
     const { data: movieData, isLoading, isError, error } = useSearchMovieQuery({ keyword, genre, page, sortOption });
 
     const sortMovies = (movies, sortOption) => {
-      switch (sortOption) {
-          case 'popularity.desc':
-              return movies.sort((a, b) => b.popularity - a.popularity);
-          case 'popularity.asc':
-              return movies.sort((a, b) => a.popularity - b.popularity);
-          case 'vote_average.desc':
-              return movies.sort((a, b) => b.vote_average - a.vote_average);
-          case 'vote_average.asc':
-              return movies.sort((a, b) => a.vote_average - b.vote_average);
-          default:
-              return movies;
-      }
-  };
+        switch (sortOption) {
+            case 'popularity.desc':
+                return movies.sort((a, b) => b.popularity - a.popularity);
+            case 'popularity.asc':
+                return movies.sort((a, b) => a.popularity - b.popularity);
+            case 'vote_average.desc':
+                return movies.sort((a, b) => b.vote_average - a.vote_average);
+            case 'vote_average.asc':
+                return movies.sort((a, b) => a.vote_average - b.vote_average);
+            default:
+                return movies;
+        }
+    };
 
-  useEffect(() => {
-    if (movieData) {
-        const sortedMovies = sortMovies(movieData.results, sortOption);
-        setSelectedMovies(sortedMovies);
-    }
-}, [movieData, sortOption]);
+    useEffect(() => {
+        if (movieData) {
+            const sortedMovies = sortMovies(movieData.results, sortOption);
+            setSelectedMovies(sortedMovies);
+        }
+    }, [movieData, sortOption]);
 
     const handlePageClick = ({ selected }) => {
         setPage(selected + 1);
     };
 
     const showMoviesByGenre = (genreId) => {
-      navigate(`/movies?g=${genreId}`);
-      setSortOption('popularity.desc');
+        navigate(`/movies?g=${genreId}`);
+        setSortOption('popularity.desc');
     };
-
 
     if (isLoading) {
         return (
@@ -69,41 +67,40 @@ const Moviepage = () => {
         );
     }
 
+    const sortOptions = [
+        { value: 'popularity.desc', label: '인기 (내림차순)' },
+        { value: 'popularity.asc', label: '인기 (오름차순)' },
+        { value: 'vote_average.desc', label: '평점 (내림차순)' },
+        { value: 'vote_average.asc', label: '평점 (오름차순)' }
+    ];
 
     return (
         <div>
             <Container className='container'>
                 <Row>
-                <Col lg={4} xs={12}>
-                    <div className="sorting-filter">
-                      <label htmlFor="sort-by">Sort by</label>
-                      <Form.Select aria-label="Default select example"
-                        id="sort-by"
-                        value={sortOption}
-                        onChange={(e) => setSortOption(e.target.value)}
-                        className="form-select"
-                    >
-                        <option value="popularity.desc">인기 (내림차순)</option>
-                        <option value="popularity.asc">인기 (오름차순)</option>
-                        <option value="vote_average.desc">평점 (내림차순)</option>
-                        <option value="vote_average.asc">평점 (오름차순)</option>
-                      </Form.Select>
-                    </div>
-                    <div className="genre-filter">
-                      {genreData?.map((genre) => (
-                        <Button
-                          key={genre.id}
-                          variant={genre === genre.id ? "danger" : "outline-danger"}
-                          className="me-3"
-                          onClick={() => showMoviesByGenre(genre.id)}
-                        >
-                          {genre.name}
-                        </Button>
-                      ))}
-                    </div>
-                  </Col>
+                    <Col lg={4} xs={12}>
+                        <div className="sorting-filter">
+                            <label htmlFor="sort-by">Sort by</label>
+                            <CustomDropdown
+                                options={sortOptions}
+                                value={sortOption}
+                                onChange={setSortOption}
+                            />
+                        </div>
+                        <div className="genre-filter">
+                            {genreData?.map((genre) => (
+                                <Button
+                                    key={genre.id}
+                                    variant={genre === genre.id ? "danger" : "outline-danger"}
+                                    className="me-3"
+                                    onClick={() => showMoviesByGenre(genre.id)}
+                                >
+                                    {genre.name}
+                                </Button>
+                            ))}
+                        </div>
+                    </Col>
 
-                  
                     <Col lg={8} xs={12}>
                         <Row>
                             {movieData?.results.length > 0 ? (

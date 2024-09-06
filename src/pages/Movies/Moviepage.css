@@ -55,23 +55,6 @@
     font-weight: bold;
   }
   
-  .sorting-filter .form-select {
-    background-color:#000; 
-    color: #ccc; 
-    border: 1px solid #ccc; 
-    max-width: 200px; 
-  }
-  
-  .sorting-filter .form-select option {
-    background-color: #000; 
-    color: #fff;
-  }
-
-  .sorting-filter .form-select:focus option:checked {
-    background-color: rgb(255, 35, 35); 
-    color: #fff;
-  }
-
   .genre-filter {
     display: flex; 
     align-items: center; 
