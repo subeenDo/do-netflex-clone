@@ -14,6 +14,7 @@ const Moviepage = () => {
     const [query, setQuery] = useSearchParams();
     const [page, setPage] = useState(1);
     const [selectedMovies, setSelectedMovies] = useState([]);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Determine initial screen size
     const keyword = query.get("q");
     const genre = query.get("g");
     const navigate = useNavigate();
@@ -42,7 +43,13 @@ const Moviepage = () => {
             const sortedMovies = sortMovies(movieData.results, sortOption);
             setSelectedMovies(sortedMovies);
         }
-    }, [movieData, sortOption]);
+    }, [movieData, sortOption]); // Only re-run if movieData or sortOption changes
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 768);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount
 
     const handlePageClick = ({ selected }) => {
         setPage(selected + 1);
@@ -120,8 +127,8 @@ const Moviepage = () => {
                 {movieData?.results.length > 0 && (
                     <div className="pagination-container">
                         <ReactPaginate
-                            previousLabel="Previous"
-                            nextLabel="Next"
+                            previousLabel={isMobile ? "<" : "Previous"}
+                            nextLabel={isMobile ? ">" : "Next"}
                             pageClassName="page-item"
                             pageLinkClassName="page-link"
                             previousClassName="page-item"
@@ -132,8 +139,8 @@ const Moviepage = () => {
                             breakClassName="page-item"
                             breakLinkClassName="page-link"
                             pageCount={movieData?.total_pages}
-                            marginPagesDisplayed={2}
-                            pageRangeDisplayed={5}
+                            marginPagesDisplayed={isMobile ? 1 : 2}
+                            pageRangeDisplayed={isMobile ? 3 : 5}
                             onPageChange={handlePageClick}
                             containerClassName="pagination"
                             activeClassName="active"
