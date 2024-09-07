@@ -4,6 +4,7 @@
     background-size: cover;
     cursor:pointer;
     transition:0.5s;
+    margin-bottom: 10%;
 }
 
 .overlay{
