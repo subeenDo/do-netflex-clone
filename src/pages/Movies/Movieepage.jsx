@@ -14,7 +14,7 @@ const Moviepage = () => {
     const [query, setQuery] = useSearchParams();
     const [page, setPage] = useState(1);
     const [selectedMovies, setSelectedMovies] = useState([]);
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Determine initial screen size
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const keyword = query.get("q");
     const genre = query.get("g");
     const navigate = useNavigate();
@@ -43,14 +43,14 @@ const Moviepage = () => {
             const sortedMovies = sortMovies(movieData.results, sortOption);
             setSelectedMovies(sortedMovies);
         }
-    }, [movieData, sortOption]); // Only re-run if movieData or sortOption changes
+    }, [movieData, sortOption]);
 
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth <= 768);
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount
-
+    }, []); 
+    
     const handlePageClick = ({ selected }) => {
         setPage(selected + 1);
     };
