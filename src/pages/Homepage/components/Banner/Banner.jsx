@@ -22,9 +22,18 @@ const Banner = () => {
             <Alert variant='danger'>{error.message}</Alert>
         );
     }
+
     const movie = data.results[0];
     const handleClick = () => {
       navigate(`/movies/${movie.id}`);
+    };
+
+    // Mobile 화면에서만 글자 수를 제한하는 로직
+    const truncateText = (text, limit) => {
+      if (window.innerWidth <= 768 && text.length > limit) {
+        return text.slice(0, limit) + '...';
+      }
+      return text;
     };
 
   return (
@@ -35,11 +44,11 @@ const Banner = () => {
         onClick={handleClick} 
     >
         <div className='text-white banner-text-area'>
-            <h1>{data?.results[0].title}</h1>
-            <p>{data?.results[0].overview}</p>
+            <h1>{movie.title}</h1>
+            <p>{truncateText(movie.overview, 100)}</p>
         </div>
     </div>
   )
 }
 
-export default Banner
+export default Banner;

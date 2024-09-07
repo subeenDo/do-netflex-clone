@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMovieRewiewsQuery } from '../../hooks/useMovieRewiews';
 import Button from 'react-bootstrap/Button';
-import "./MovieReview.css"
+import "./MovieReview.css";
 
 const MovieReview = () => {
   const { id } = useParams();
@@ -31,10 +31,10 @@ const MovieReview = () => {
 
   return (
     <div className="movie-reviews">
-      <h2 className='review-title'>✒️Reviews</h2>
+      <h2 className='review-title'>Reviews</h2>
       {data.results.map((review, index) => (
         <div key={index} className="review-item">
-          <h3>{review.author}</h3>
+          <h3>👤 {review.author}</h3>
           <p>
             {expanded[index]
               ? review.content
@@ -43,12 +43,13 @@ const MovieReview = () => {
               : review.content}
           </p>
           {review.content.length > 300 && (
-            <Button 
-            variant="outline-danger"
-            className="me-3"
-             onClick={() => handleToggle(index)}>
-              {expanded[index] ? 'Read Less' : 'Read More'}
-            </Button>
+            <div className="btn-container">
+              <Button 
+                variant="outline-danger"
+                onClick={() => handleToggle(index)}>
+                {expanded[index] ? 'Read Less' : 'Read More'}
+              </Button>
+            </div>
           )}
         </div>
       ))}

@@ -61,8 +61,8 @@ const MovieDetail = () => {
               <p><strong>👍 </strong> {data.vote_average}</p>
               <p><strong>❤️ </strong> {data.popularity}</p>
               <p><strong>💲 </strong> ${data.budget.toLocaleString()}</p>
-              <p>{data.overview}</p>
               <p><strong>📆 </strong> {data.release_date}</p>
+              <p>{data.overview}</p>
               <p>
                 <Button variant="outline-danger" onClick={handleShow}>
                   Video

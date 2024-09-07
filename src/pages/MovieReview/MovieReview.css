@@ -1,9 +1,23 @@
-.review-title{
+.review-title {
     margin-top: 5%;
     margin-bottom: 5%;
-   
-}
-
-.movie-reviews{
+  }
+  
+  .movie-reviews {
     margin-bottom: 5%;
-}
+  }
+  
+  .review-item {
+    border-bottom: 1px solid #ddd; 
+    padding-bottom: 10px; 
+    margin-bottom: 20px; 
+    
+  }
+  .review-item .btn-container {
+    text-align: right; 
+  }
+  
+  .review-item .btn {
+    margin-bottom: 10px; 
+    
+  }

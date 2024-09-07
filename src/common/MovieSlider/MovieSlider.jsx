@@ -6,7 +6,7 @@ import './MovieSlider.css';
 
 const MovieSlider = ({ title, movies, responsive }) => {
   return (
-    <div >
+    <div className='slider-cotainer'>
       <h3 className='title'>{title}</h3>
       <Carousel
         draggable={true}

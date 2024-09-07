@@ -76,7 +76,7 @@ const Moviepage = () => {
 
     return (
         <div>
-            <Container className='container'>
+            <Container className='container moviepage'>
                 <Row>
                     <Col lg={4} xs={12}>
                         <div className="sorting-filter">

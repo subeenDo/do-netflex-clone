@@ -35,8 +35,8 @@
     .movie-card {
         margin-left: 18%;
         margin-bottom: 5%;
-        width: 320px;
-        height: 480px;
+        width: 240px;
+        height: 360px;
         background-size: cover;
         cursor:pointer;
         transition:0.5s;
