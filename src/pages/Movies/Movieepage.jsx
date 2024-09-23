@@ -12,15 +12,18 @@ import "./Moviepage.css";
 
 const Moviepage = () => {
     const [query, setQuery] = useSearchParams();
-    const [page, setPage] = useState(1);
+    const navigate = useNavigate();
+
+    const [sortOption, setSortOption] = useState('popularity.desc');
     const [selectedMovies, setSelectedMovies] = useState([]);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+    const pageFromUrl = parseInt(query.get("p") || "1");
+    const [page, setPage] = useState(pageFromUrl);
     const keyword = query.get("q");
     const genre = query.get("g");
-    const navigate = useNavigate();
-    const [sortOption, setSortOption] = useState('popularity.desc');
 
-    const { data: genreData } = useMovieGenreQuery(); 
+    const { data: genreData } = useMovieGenreQuery();
     const { data: movieData, isLoading, isError, error } = useSearchMovieQuery({ keyword, genre, page, sortOption });
 
     const sortMovies = (movies, sortOption) => {
@@ -39,6 +42,10 @@ const Moviepage = () => {
     };
 
     useEffect(() => {
+        setPage(pageFromUrl); 
+    }, [pageFromUrl]);
+
+    useEffect(() => {
         if (movieData) {
             const sortedMovies = sortMovies(movieData.results, sortOption);
             setSelectedMovies(sortedMovies);
@@ -49,14 +56,20 @@ const Moviepage = () => {
         const handleResize = () => setIsMobile(window.innerWidth <= 768);
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, []); 
-    
+    }, []);
+
     const handlePageClick = ({ selected }) => {
-        setPage(selected + 1);
+        const newPage = selected + 1;
+        setPage(newPage);
+        setQuery(prev => {
+            const params = new URLSearchParams(prev);
+            params.set("p", newPage);
+            return params;
+        });
     };
 
     const showMoviesByGenre = (genreId) => {
-        navigate(`/movies?g=${genreId}`);
+        setQuery({ g: genreId, page: 1 }); 
         setSortOption('popularity.desc');
     };
 
@@ -144,7 +157,7 @@ const Moviepage = () => {
                             onPageChange={handlePageClick}
                             containerClassName="pagination"
                             activeClassName="active"
-                            forcePage={page - 1}
+                            forcePage={page - 1}  
                         />
                     </div>
                 )}
