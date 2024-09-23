@@ -1,5 +1,5 @@
 <h3>NETFLEX 애플리케이션 개발</h3>
-배포 : https://master--do-netflex-clone-site.netlify.app/</br>
+배포 : do-netflex-clone.vercel.app/</br>
 </br>
 
 Day1 Router구성, Layout만들기</br>
